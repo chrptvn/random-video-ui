@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { VideoLink } from '../models/video-link.model';
@@ -9,23 +10,23 @@ export class VideoLinkService {
   private videoLinks: VideoLink[] = [];
   private videoLinksSubject = new BehaviorSubject<VideoLink[]>([]);
 
+  constructor(
+      private readonly http: HttpClient,
+  ) {}
+
   getVideoLinks(): Observable<VideoLink[]> {
     return this.videoLinksSubject.asObservable();
   }
 
   addVideoLink(url: string): void {
-    const newLink: VideoLink = {
-      id: crypto.randomUUID(),
-      url,
-      addedAt: new Date()
-    };
-    this.videoLinks.push(newLink);
-    this.videoLinksSubject.next([...this.videoLinks]);
+    this.http.post<VideoLink>('/submit', { url })
+        .subscribe(link => {
+          this.videoLinks.push(link);
+          this.videoLinksSubject.next([...this.videoLinks]);
+        });
   }
 
-  getRandomVideo(): VideoLink | null {
-    if (this.videoLinks.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * this.videoLinks.length);
-    return this.videoLinks[randomIndex];
+  getRandomVideo(): Observable<VideoLink> {
+    return this.http.get<VideoLink>('/random');
   }
 }

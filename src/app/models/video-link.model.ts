@@ -1,5 +1,4 @@
 export interface VideoLink {
-  id: string;
+  id: number;
   url: string;
-  addedAt: Date;
 }

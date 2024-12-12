@@ -16,7 +16,6 @@ import { VideoLink } from '../../models/video-link.model';
              class="text-purple-300 hover:text-purple-200 break-all">
             {{ video.url }}
           </a>
-          <p class="text-sm text-purple-400/60 mt-2">Added {{ video.addedAt | date:'MMM d, y, h:mm a' }}</p>
         </div>
       }
     </div>

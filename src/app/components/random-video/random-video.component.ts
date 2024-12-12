@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { VideoLinkService } from '../../services/video-link.service';
+import { VideoLink } from '../../models/video-link.model';
 
 @Component({
   selector: 'app-random-video',
@@ -17,11 +18,18 @@ export class RandomVideoComponent {
   constructor(private videoLinkService: VideoLinkService) {}
 
   openRandomVideo(): void {
-    const randomVideo = this.videoLinkService.getRandomVideo();
-    if (randomVideo) {
-      window.open(randomVideo.url, '_blank');
-    } else {
-      alert('No videos available');
-    }
+    this.videoLinkService.getRandomVideo().subscribe({
+      next: (randomVideo: VideoLink) => {
+        if (randomVideo && randomVideo.url) {
+          window.open(randomVideo.url, '_blank');
+        } else {
+          alert('No videos available');
+        }
+      },
+      error: (err) => {
+        console.error('Failed to fetch random video:', err);
+        alert('An error occurred while fetching a random video.');
+      },
+    });
   }
 }
