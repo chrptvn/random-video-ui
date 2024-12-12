@@ -1,24 +1,24 @@
 {
   "/submit": {
-    "target": "http://localhost:8080",
+    "target": "https://random.video",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
   },
   "/signal": {
-    "target": "http://localhost:8080",
+    "target": "https://random.video",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
   },
   "/random": {
-    "target": "http://localhost:8080",
+    "target": "https://random.video",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
   },
   "/hosts": {
-    "target": "http://localhost:8080",
+    "target": "https://random.video",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
