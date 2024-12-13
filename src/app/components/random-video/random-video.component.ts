@@ -1,34 +1,26 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VideoLinkService } from '../../services/video-link.service';
 import { VideoLink } from '../../models/video-link.model';
 import { Host } from '../../models/host.model';
-import {RandomLinkFilter} from "../../models/random-link-filter.model";
+import { RandomLinkFilter } from "../../models/random-link-filter.model";
+import { VideoFilterComponent } from '../video-filter/video-filter.component';
 
 @Component({
   selector: 'app-random-video',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, VideoFilterComponent],
   templateUrl: './random-video.component.html'
 })
 export class RandomVideoComponent {
-
-  @Input()
-  hosts: Host[] = [];
-
+  @Input() hosts: Host[] = [];
   showFilter = false;
 
   constructor(private videoLinkService: VideoLinkService) {}
 
-  toggleFilter(): void {
-    this.showFilter = !this.showFilter;
-  }
-
   toggleHost(host: Host): void {
     host.enabled = !host.enabled;
-    // In a real application, you might want to persist this state
-    // this.videoLinkService.updateHostPreferences(this.hosts);
   }
 
   openRandomVideo(): void {
