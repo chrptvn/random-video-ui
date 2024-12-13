@@ -1,24 +1,6 @@
 {
-  "/submit": {
-    "target": "https://random.video",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/signal": {
-    "target": "https://random.video",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/random": {
-    "target": "https://random.video",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/hosts": {
-    "target": "https://random.video",
+  "/api": {
+    "target": "https://random.video/api",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

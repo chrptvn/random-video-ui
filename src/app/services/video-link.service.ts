@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { VideoLink } from '../models/video-link.model';
+import {Host} from "../models/host.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class VideoLinkService {
   }
 
   addVideoLink(url: string): void {
-    this.http.post<VideoLink>('/submit', { url })
+    this.http.post<VideoLink>('/api/submit', { url })
         .subscribe(link => {
           this.videoLinks.push(link);
           this.videoLinksSubject.next([...this.videoLinks]);
@@ -27,6 +28,16 @@ export class VideoLinkService {
   }
 
   getRandomVideo(): Observable<VideoLink> {
-    return this.http.get<VideoLink>('/random');
+    return this.http.get<VideoLink>('/api/random');
+  }
+
+  getHosts(): Observable<Host[]> {
+    return of([
+      {
+        id: 1,
+        name: "www.youtube.com",
+        enabled: true,
+      } as Host,
+    ]);
   }
 }
