@@ -1,0 +1,24 @@
+<div>
+    <form (ngSubmit)="onSubmit()" class="flex gap-4">
+        <input
+                type="url"
+                [(ngModel)]="url"
+                name="url"
+                required
+                [class]="inputClasses"
+                placeholder="Paste your video URL here"
+        >
+        <button
+                type="submit"
+                class="px-6 py-4 bg-purple-600 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        >
+            Add
+        </button>
+    </form>
+
+    @if (error) {
+        <div class="mt-2 text-red-400 text-sm">
+            {{ error }}
+        </div>
+    }
+</div>

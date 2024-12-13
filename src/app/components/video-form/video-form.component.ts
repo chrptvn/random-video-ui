@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoLinkService } from '../../services/video-link.service';
 import { UrlValidator } from '../../utils/url-validator';
@@ -8,36 +8,13 @@ import { Host } from '../../models/host.model';
   selector: 'app-video-form',
   standalone: true,
   imports: [FormsModule],
-  template: `
-    <div>
-      <form (ngSubmit)="onSubmit()" class="flex gap-4">
-        <input
-          type="url"
-          [(ngModel)]="url"
-          name="url"
-          required
-          [class]="inputClasses"
-          placeholder="Paste your video URL here"
-        >
-        <button
-          type="submit"
-          class="px-6 py-4 bg-purple-600 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
-        >
-          Add
-        </button>
-      </form>
-      
-      @if (error) {
-        <div class="mt-2 text-red-400 text-sm">
-          {{ error }}
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './video-form.component.html'
 })
-export class VideoFormComponent implements OnInit {
+export class VideoFormComponent {
   url = '';
   error = '';
+
+  @Input()
   hosts: Host[] = [];
 
   get inputClasses(): string {
@@ -51,12 +28,6 @@ export class VideoFormComponent implements OnInit {
 
   constructor(private videoLinkService: VideoLinkService) {}
 
-  ngOnInit() {
-    this.videoLinkService.getHosts().subscribe(hosts => {
-      this.hosts = hosts;
-    });
-  }
-
   validateUrl(): string | null {
     if (!this.url.trim()) {
       return 'Please enter a URL';
@@ -68,7 +39,6 @@ export class VideoFormComponent implements OnInit {
 
     if (!UrlValidator.isHostWhitelisted(this.url, this.hosts)) {
       const allowedHosts = this.hosts
-        .filter(host => host.enabled)
         .map(host => host.name)
         .join(', ');
       return `URL must be from one of these hosts: ${allowedHosts}`;

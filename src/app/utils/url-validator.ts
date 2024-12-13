@@ -22,9 +22,9 @@ export class UrlValidator {
   static isHostWhitelisted(url: string, whitelistedHosts: Host[]): boolean {
     const hostname = this.getHostFromUrl(url);
     if (!hostname) return false;
-    
+
     return whitelistedHosts.some(host => 
-      host.enabled && hostname.includes(host.name)
+      hostname.includes(host.name)
     );
   }
 }
