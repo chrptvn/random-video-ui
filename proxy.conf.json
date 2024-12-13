@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://random.video/api",
+    "target": "https://random.video",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
