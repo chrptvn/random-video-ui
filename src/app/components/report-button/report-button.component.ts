@@ -1,5 +1,6 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { VideoStatus } from '../../models/video-status.enum';
 
 @Component({
   selector: 'app-report-button',
@@ -8,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './report-button.component.html'
 })
 export class ReportButtonComponent {
-  @Input({transform: booleanAttribute}) isReported = false;
+  @Input() isReported = false;
   @Output() report = new EventEmitter<void>();
 
   onReport(): void {

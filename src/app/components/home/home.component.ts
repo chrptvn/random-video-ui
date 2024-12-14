@@ -3,11 +3,9 @@ import { VideoFormComponent } from '../video-form/video-form.component';
 import { LastSeenVideoLinkComponent } from '../last-seen-video-link/last-seen-video-link.component';
 import { RandomVideoComponent } from '../random-video/random-video.component';
 import { FooterComponent } from '../footer/footer.component';
-import { VideoLinkService } from "../../services/video-link.service";
-import { Host } from "../../models/host.model";
-import { Observable } from "rxjs";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { AgeVerificationComponent } from '../age-verification/age-verification.component';
+import { VideoListComponent } from '../video-list/video-list.component';
 
 @Component({
   selector: 'app-home',
@@ -19,12 +17,12 @@ import { AgeVerificationComponent } from '../age-verification/age-verification.c
     FooterComponent,
     NgIf,
     AsyncPipe,
-    AgeVerificationComponent
+    AgeVerificationComponent,
+    VideoListComponent
   ],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-
   showAgeVerification = !localStorage.getItem('age-verified');
 
   onAgeVerified(): void {

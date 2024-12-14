@@ -1,18 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoLinkService } from '../../services/video-link.service';
 import { UrlValidator } from '../../utils/url-validator';
-import { Host } from '../../models/host.model';
+import { VideoLink } from '../../models/video-link.model';
+import { VideoListComponent } from '../video-list/video-list.component';
 
 @Component({
   selector: 'app-video-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, VideoListComponent],
   templateUrl: './video-form.component.html'
 })
 export class VideoFormComponent {
   url = '';
   error = '';
+  videoLinks: VideoLink[] = [];
 
   get inputClasses(): string {
     return `flex-1 p-4 rounded-lg bg-white/10 border focus:outline-none focus:ring-2 
@@ -48,9 +50,10 @@ export class VideoFormComponent {
     }
 
     this.videoLinkService.addVideoLink(this.url).subscribe({
-      next: () => {
+      next: (videos) => {
         this.url = '';
         this.error = '';
+        this.videoLinks = videos;
       },
       error: (err) => {
         console.error('Failed to add video:', err);

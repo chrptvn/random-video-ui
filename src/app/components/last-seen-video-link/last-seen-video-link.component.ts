@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import { VideoLinkService } from '../../services/video-link.service';
 import { VideoLink } from '../../models/video-link.model';
 import { Observable } from "rxjs";
 import { ReportButtonComponent } from '../report-button/report-button.component';
+import { VideoStatus } from '../../models/video-status.enum';
 
 @Component({
   selector: 'app-last-seen-video-list',
@@ -19,7 +20,7 @@ export class LastSeenVideoLinkComponent {
   public reportAbuse(videoLink: VideoLink): void {
     this.videoLinkService.reportLink(videoLink).subscribe({
       next: () => {
-        videoLink.reported = true
+        videoLink.status = VideoStatus.REPORTED;
       },
       error: (err) => {
         console.error('Failed to report video:', err);

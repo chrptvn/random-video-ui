@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VideoLinkService } from '../../services/video-link.service';
 import { VideoLink } from '../../models/video-link.model';
-import { Host } from '../../models/host.model';
 import { RandomLinkFilter } from "../../models/random-link-filter.model";
 
 @Component({
@@ -16,7 +15,6 @@ export class RandomVideoComponent {
   constructor(private videoLinkService: VideoLinkService) {}
 
   openRandomVideo(): void {
-
     this.videoLinkService.getRandomVideo({ excludedLinkIds: []} as RandomLinkFilter).subscribe({
       next: (randomVideo: VideoLink) => {
         if (randomVideo?.url) {
