@@ -17,8 +17,6 @@
     </form>
 
     @if (error) {
-        <div class="mt-2 text-red-400 text-sm">
-            {{ error }}
-        </div>
+        <div class="mt-2 text-red-400 text-sm" [innerHTML]="error"></div>
     }
 </div>

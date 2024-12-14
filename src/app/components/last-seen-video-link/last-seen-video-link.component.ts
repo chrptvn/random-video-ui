@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import { VideoLinkService } from '../../services/video-link.service';
 import { VideoLink } from '../../models/video-link.model';
-import { Observable, BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
 import { ReportButtonComponent } from '../report-button/report-button.component';
 
 @Component({
@@ -13,20 +13,16 @@ import { ReportButtonComponent } from '../report-button/report-button.component'
 })
 export class LastSeenVideoLinkComponent {
   lastWatchedVideoLink$: Observable<VideoLink | undefined> = this.videoLinkService.getLastWatchedVideo();
-  private isReported = new BehaviorSubject<boolean>(false);
-  isReported$ = this.isReported.asObservable();
-  
+
   constructor(private videoLinkService: VideoLinkService) {}
 
   public reportAbuse(videoLink: VideoLink): void {
     this.videoLinkService.reportLink(videoLink).subscribe({
       next: () => {
-        this.isReported.next(true);
-        alert('Thank you for helping keep our community safe. The video has been flagged for review.');
+        videoLink.reported = true
       },
       error: (err) => {
         console.error('Failed to report video:', err);
-        alert('Unable to flag the video. Please try again later.');
       }
     });
   }

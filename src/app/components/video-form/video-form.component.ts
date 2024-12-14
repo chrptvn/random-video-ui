@@ -39,7 +39,7 @@ export class VideoFormComponent {
 
     if (!UrlValidator.isHostWhitelisted(this.url, this.hosts)) {
       const allowedHosts = this.hosts
-        .map(host => host.name)
+        .map(host => `<a href="https://${host.name}/" class="text-red-500 underline cursor-pointer" target="_blank" rel="noopener noreferrer">${host.name}</a>`)
         .join(', ');
       return `URL must be from one of these hosts: ${allowedHosts}`;
     }
@@ -53,6 +53,7 @@ export class VideoFormComponent {
     const validationError = this.validateUrl();
     if (validationError) {
       this.error = validationError;
+      this.url = '';
       return;
     }
 

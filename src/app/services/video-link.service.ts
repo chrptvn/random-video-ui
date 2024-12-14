@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {BehaviorSubject, map, Observable, of} from 'rxjs';
 import { VideoLink } from '../models/video-link.model';
 import { Host } from "../models/host.model";
 import {RandomLinkFilter} from "../models/random-link-filter.model";
@@ -9,7 +9,7 @@ import {RandomLinkFilter} from "../models/random-link-filter.model";
   providedIn: 'root'
 })
 export class VideoLinkService {
-  private lastWatchedVideoLink = new BehaviorSubject<VideoLink | undefined>({"id": 123, "url": "https://www.youtube.com/watch?v=123"} as VideoLink);
+  private lastWatchedVideoLink = new BehaviorSubject<VideoLink | undefined>(undefined);
 
   constructor(private readonly http: HttpClient) {}
 
@@ -23,12 +23,14 @@ export class VideoLinkService {
   }
 
   getHosts(): Observable<Host[]> {
-    // return this.http.get<Host[]>('/api/hosts');
-    return of([ {
-      id: 1,
-      name: 'www.youtube.com',
-      enabled: true
-    } as Host ]);
+    return this.http.get<Host[]>('/api/hosts').pipe(
+        map(hosts =>
+            hosts.map(host => ({
+              ...host,
+              enabled: true
+            }))
+        )
+    );
   }
 
   reportLink(link: VideoLink): Observable<VideoLink> {

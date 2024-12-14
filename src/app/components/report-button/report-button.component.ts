@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './report-button.component.html'
 })
 export class ReportButtonComponent {
-  @Input() isReported = false;
+  @Input({transform: booleanAttribute}) isReported = false;
   @Output() report = new EventEmitter<void>();
 
   onReport(): void {

@@ -1,15 +1,13 @@
 <div *ngIf="lastWatchedVideoLink$ | async as lastWatchedLink" class="p-4 bg-white/5 backdrop-blur-sm border border-purple-500/20 rounded-lg">
-    <div class="flex flex-col gap-2">
+    <div class="flex items-center justify-between gap-2">
         <a [href]="lastWatchedLink.url"
            target="_blank"
            class="text-purple-300 hover:text-purple-200 break-all">
             {{ lastWatchedLink.url }}
         </a>
-        <div class="flex justify-end">
-            <app-report-button *ngIf="isReported$ | async as isReported"
-                [isReported]="isReported"
-                (report)="reportAbuse(lastWatchedLink)" 
-            />
-        </div>
+        <app-report-button
+                [isReported]="lastWatchedLink.reported"
+                (report)="reportAbuse(lastWatchedLink)">
+        </app-report-button>
     </div>
 </div>
