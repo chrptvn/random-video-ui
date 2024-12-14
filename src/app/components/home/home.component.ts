@@ -24,10 +24,8 @@ import { AgeVerificationComponent } from '../age-verification/age-verification.c
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  hosts$: Observable<Host[]> = this.videoLinkService.getHosts();
-  showAgeVerification = !localStorage.getItem('age-verified');
 
-  constructor(private videoLinkService: VideoLinkService) {}
+  showAgeVerification = !localStorage.getItem('age-verified');
 
   onAgeVerified(): void {
     this.showAgeVerification = false;

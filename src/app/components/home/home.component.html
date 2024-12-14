@@ -4,10 +4,10 @@
             random.video
         </h1>
         <div class="mb-12">
-            <app-video-form *ngIf="hosts$ | async as hosts" [hosts]="hosts" />
+            <app-video-form />
         </div>
         <div class="text-center mb-12">
-            <app-random-video *ngIf="hosts$ | async as hosts" [hosts]="hosts" />
+            <app-random-video />
         </div>
         <app-last-seen-video-list />
         <app-footer />

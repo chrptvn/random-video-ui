@@ -14,8 +14,23 @@ export class VideoLinkService {
   constructor(private readonly http: HttpClient) {}
 
 
-  addVideoLink(url: string): Observable<VideoLink> {
-    return this.http.post<VideoLink>('/api/submit', { url });
+  addVideoLink(url: string): Observable<VideoLink[]> {
+    // return this.http.post<VideoLink>('/api/submit', { url });
+    return of([
+      {
+        id: 1,
+        url: "https://scienceandfilm.org/uploads/videos/files/",
+        video: 'https://scienceandfilm.org/uploads/videos/files/The_Fountain_%5bTrailer%5d_HD_1080p.mp4',
+        reported: false
+      } as VideoLink,
+      {
+        id: 2,
+        url: "https://scienceandfilm.org/uploads/videos/files/",
+        video: 'https://scienceandfilm.org/uploads/videos/files/The_Fountain_%5bTrailer%5d_HD_1080p.mp4',
+        reported: false
+      } as VideoLink,
+    ]);
+
   }
 
   getRandomVideo(filter: RandomLinkFilter): Observable<VideoLink> {

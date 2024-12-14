@@ -14,9 +14,6 @@ export class VideoFormComponent {
   url = '';
   error = '';
 
-  @Input()
-  hosts: Host[] = [];
-
   get inputClasses(): string {
     return `flex-1 p-4 rounded-lg bg-white/10 border focus:outline-none focus:ring-2 
       ${this.error 
@@ -35,13 +32,6 @@ export class VideoFormComponent {
 
     if (!UrlValidator.isValidUrl(this.url)) {
       return 'Please enter a valid URL';
-    }
-
-    if (!UrlValidator.isHostWhitelisted(this.url, this.hosts)) {
-      const allowedHosts = this.hosts
-        .map(host => `<a href="https://${host.name}/" class="text-red-500 underline cursor-pointer" target="_blank" rel="noopener noreferrer">${host.name}</a>`)
-        .join(', ');
-      return `URL must be from one of these hosts: ${allowedHosts}`;
     }
 
     return null;

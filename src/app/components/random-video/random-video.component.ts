@@ -5,35 +5,19 @@ import { VideoLinkService } from '../../services/video-link.service';
 import { VideoLink } from '../../models/video-link.model';
 import { Host } from '../../models/host.model';
 import { RandomLinkFilter } from "../../models/random-link-filter.model";
-import { VideoFilterComponent } from '../video-filter/video-filter.component';
 
 @Component({
   selector: 'app-random-video',
   standalone: true,
-  imports: [CommonModule, FormsModule, VideoFilterComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './random-video.component.html'
 })
 export class RandomVideoComponent {
-  @Input() hosts: Host[] = [];
-  showFilter = false;
-
   constructor(private videoLinkService: VideoLinkService) {}
 
-  toggleHost(host: Host): void {
-    host.enabled = !host.enabled;
-  }
-
   openRandomVideo(): void {
-    const enabledHosts = this.hosts
-      .filter(host => host.enabled)
-      .map(host => host.id);
 
-    if (enabledHosts.length === 0) {
-      alert('Please select at least one host');
-      return;
-    }
-
-    this.videoLinkService.getRandomVideo({hostIds: enabledHosts, excludedLinkIds: []} as RandomLinkFilter).subscribe({
+    this.videoLinkService.getRandomVideo({ excludedLinkIds: []} as RandomLinkFilter).subscribe({
       next: (randomVideo: VideoLink) => {
         if (randomVideo?.url) {
           this.videoLinkService.setLastWatchedVideo(randomVideo);
