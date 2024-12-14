@@ -13,3 +13,9 @@
         <app-footer />
     </div>
 </div>
+
+<app-age-verification
+    *ngIf="showAgeVerification"
+    (verified)="onAgeVerified()"
+    (rejected)="onAgeRejected()"
+/>
