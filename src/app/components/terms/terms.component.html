@@ -23,8 +23,7 @@
             <h2 class="text-2xl font-semibold mb-4 text-purple-300">3. Approved Platforms</h2>
             <p class="mb-4">Links submitted to our platform must originate from the following approved domains:</p>
             <ul class="list-disc pl-6 mb-6">
-                <li>youtube.com</li>
-                <li>vimeo.com</li>
+                <li *ngFor="let host of hosts$ | async">{{ host.name }}</li>
             </ul>
 
             <h2 class="text-2xl font-semibold mb-4 text-purple-300">4. Prohibited Content</h2>
@@ -38,9 +37,7 @@
 
             <h2 class="text-2xl font-semibold mb-4 text-purple-300">5. Privacy</h2>
             <p class="mb-6">
-                We do not collect or store any personal information or user data. To enforce publishing
-                limitations, we store a temporary cookie on your device. This cookie contains no personal
-                or identifiable information and is deleted automatically after a short period.
+                We do not collect or store any personal information or user data.
             </p>
 
             <div class="mt-8 mb-8">
