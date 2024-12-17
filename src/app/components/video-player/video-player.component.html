@@ -1,0 +1,43 @@
+<div *ngIf="videoLink" class="bg-white/5 backdrop-blur-sm border border-purple-500/20 rounded-lg overflow-hidden">
+    <video
+            [src]="videoLink.video"
+            controls
+            class="w-full aspect-video bg-black/50"
+    ></video>
+    <div class="p-4">
+        <div class="flex items-center justify-between gap-4 mb-3">
+
+            <div class="text-xs text-purple-400/60">
+            @switch (videoLink.status) {
+                @case (VideoStatus.FETCHED) {
+                    Be sure to read the content policy before submitting the video link.
+                }
+                @case (VideoStatus.READY) {
+                    The video link has been submitted.
+                }
+                @case (VideoStatus.REPORTED) {
+                    Thank you for contributing to a safe community.
+                }
+                @default {
+                    Publicly available at <br/>
+                    <a [href]="videoLink.url" target="_blank" class="text-purple-300 hover:text-purple-200 text-sm truncate">
+                        {{ videoLink.url }}
+                    </a>
+                }
+            }
+            </div>
+            <app-video-status-button
+                    [status]="videoLink.status"
+                    (statusChange)="onStatusChange(videoLink)"
+            />
+        </div>
+        <div class="text-xs text-purple-400/60 text-right">
+            <a
+                    routerLink="/terms"
+                    class="hover:text-purple-300 transition-colors underline"
+            >
+                Content Policy
+            </a>
+        </div>
+    </div>
+</div>

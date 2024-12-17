@@ -1,5 +1,6 @@
 export enum VideoStatus {
-  ENABLED = 'ENABLED',
-  DISABLED = 'DISABLED',
+  FETCHED = 'FETCHED',
+  READY = 'READY',
+  ACTIVE = 'ACTIVE',
   REPORTED = 'REPORTED'
 }

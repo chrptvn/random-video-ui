@@ -20,5 +20,5 @@
         <div class="mt-2 text-red-400 text-sm" [innerHTML]="error"></div>
     }
 
-    <app-video-list [videos]="videoLinks"></app-video-list>
+    <app-video-list *ngIf="videoLinks$ | async as videoLinks" [videos]="videoLinks"></app-video-list>
 </div>

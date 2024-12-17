@@ -18,8 +18,7 @@ export class RandomVideoComponent {
     this.videoLinkService.getRandomVideo({ excludedLinkIds: []} as RandomLinkFilter).subscribe({
       next: (randomVideo: VideoLink) => {
         if (randomVideo?.url) {
-          this.videoLinkService.setLastWatchedVideo(randomVideo);
-          window.open(randomVideo.url, '_blank');
+          this.videoLinkService.setCurrentVideoLink(randomVideo);
         } else {
           alert('No videos available');
         }

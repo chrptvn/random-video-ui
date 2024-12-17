@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { VideoFormComponent } from '../video-form/video-form.component';
-import { LastSeenVideoLinkComponent } from '../last-seen-video-link/last-seen-video-link.component';
+import { CurrentVideoComponent } from '../current-video/current-video.component';
 import { RandomVideoComponent } from '../random-video/random-video.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AsyncPipe, NgIf } from "@angular/common";
@@ -12,7 +12,7 @@ import { VideoListComponent } from '../video-list/video-list.component';
   standalone: true,
   imports: [
     VideoFormComponent,
-    LastSeenVideoLinkComponent,
+    CurrentVideoComponent,
     RandomVideoComponent,
     FooterComponent,
     NgIf,

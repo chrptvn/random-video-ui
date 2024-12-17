@@ -3,17 +3,17 @@ import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import { VideoLinkService } from '../../services/video-link.service';
 import { VideoLink } from '../../models/video-link.model';
 import { Observable } from "rxjs";
-import { ReportButtonComponent } from '../report-button/report-button.component';
 import { VideoStatus } from '../../models/video-status.enum';
+import {VideoPlayerComponent} from "../video-player/video-player.component";
 
 @Component({
-  selector: 'app-last-seen-video-list',
+  selector: 'app-current-video',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, NgIf, ReportButtonComponent],
-  templateUrl: './last-seen-video-link.component.html',
+  imports: [AsyncPipe, DatePipe, NgIf, VideoPlayerComponent],
+  templateUrl: './current-video.component.html',
 })
-export class LastSeenVideoLinkComponent {
-  lastWatchedVideoLink$: Observable<VideoLink | undefined> = this.videoLinkService.getLastWatchedVideo();
+export class CurrentVideoComponent {
+  videoLink$: Observable<VideoLink | undefined> = this.videoLinkService.getCurrentVideoLink();
 
   constructor(private videoLinkService: VideoLinkService) {}
 
@@ -27,4 +27,6 @@ export class LastSeenVideoLinkComponent {
       }
     });
   }
+
+  protected readonly VideoStatus = VideoStatus;
 }
