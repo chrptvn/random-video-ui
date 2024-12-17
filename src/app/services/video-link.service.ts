@@ -10,6 +10,7 @@ import {VideoStatus} from "../models/video-status.enum";
 })
 export class VideoLinkService {
   private currentVideoLink = new BehaviorSubject<VideoLink | undefined>(undefined);
+  private videosToAdd = new BehaviorSubject<VideoLink[]>([]);
 
   constructor(private readonly http: HttpClient) {}
 
@@ -51,11 +52,19 @@ export class VideoLinkService {
     );
   }
 
-  setCurrentVideoLink(link: VideoLink) {
+  setCurrentVideoLink(link: VideoLink | undefined) {
     this.currentVideoLink.next(link);
   }
 
   getCurrentVideoLink(): Observable<VideoLink | undefined> {
     return this.currentVideoLink.asObservable();
   }
+
+  setVideosToAdd(videos: VideoLink[]) {
+    this.videosToAdd.next(videos);
+  }
+
+    getVideosToAdd(): Observable<VideoLink[]> {
+        return this.videosToAdd.asObservable();
+    }
 }

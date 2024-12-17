@@ -5,7 +5,7 @@ import { RandomVideoComponent } from '../random-video/random-video.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AsyncPipe, NgIf } from "@angular/common";
 import { AgeVerificationComponent } from '../age-verification/age-verification.component';
-import { VideoListComponent } from '../video-list/video-list.component';
+import { VideoAddComponent } from '../video-add/video-add.component';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ import { VideoListComponent } from '../video-list/video-list.component';
     NgIf,
     AsyncPipe,
     AgeVerificationComponent,
-    VideoListComponent
+    VideoAddComponent
   ],
   templateUrl: './home.component.html',
 })

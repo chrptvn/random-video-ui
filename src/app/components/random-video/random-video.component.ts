@@ -19,6 +19,7 @@ export class RandomVideoComponent {
       next: (randomVideo: VideoLink) => {
         if (randomVideo?.url) {
           this.videoLinkService.setCurrentVideoLink(randomVideo);
+          this.videoLinkService.setVideosToAdd([]);
         } else {
           alert('No videos available');
         }

@@ -3,22 +3,21 @@ import { FormsModule } from '@angular/forms';
 import { VideoLinkService } from '../../services/video-link.service';
 import { UrlValidator } from '../../utils/url-validator';
 import { VideoLink } from '../../models/video-link.model';
-import { VideoListComponent } from '../video-list/video-list.component';
+import { VideoAddComponent } from '../video-add/video-add.component';
 import {BehaviorSubject, catchError, map, mergeMap, Observable, of, tap} from "rxjs";
 import {AsyncPipe, CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-video-form',
   standalone: true,
-  imports: [FormsModule, VideoListComponent, AsyncPipe, CommonModule],
+  imports: [FormsModule, VideoAddComponent, AsyncPipe, CommonModule],
   templateUrl: './video-form.component.html'
 })
 export class VideoFormComponent {
   url = '';
   error = '';
 
-  private videoLinks = new BehaviorSubject<VideoLink[]>([]);
-  videoLinks$: Observable<VideoLink[]> = this.videoLinks.asObservable();
+  videoLinks$: Observable<VideoLink[]> = this.videoLinkService.getVideosToAdd();
 
   get inputClasses(): string {
     return `flex-1 p-4 rounded-lg bg-white/10 border focus:outline-none focus:ring-2 
@@ -57,7 +56,8 @@ export class VideoFormComponent {
       next: (videos) => {
         this.url = '';
         this.error = '';
-        this.videoLinks.next(videos);
+        this.videoLinkService.setVideosToAdd(videos);
+        this.videoLinkService.setCurrentVideoLink(undefined)
       },
       error: (err) => {
         console.error('Failed to add video:', err);
